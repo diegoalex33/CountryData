@@ -12,6 +12,8 @@ data class Country(var name: String,
                    var population: Long,
                    var area: Double,
                    var alpha2Code: String,
+                   var region: String,
+                   var language: String,
                    var isFavorite : Boolean
                    ): Parcelable, Comparable<Country> {
     override fun compareTo(other: Country): Int {

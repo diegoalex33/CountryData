@@ -1,5 +1,6 @@
 package com.example.countrydata
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -20,9 +21,14 @@ class CountryListActivity : AppCompatActivity() {
 
     var curList = 1
 
+    companion object{
+        var countries = arrayListOf<Country>()
+    }
+
+    lateinit var countryList: List<Country>
     private lateinit var binding: ActivityCountriesListBinding
     private lateinit var adapter: CountryAdapter
-    private lateinit var countryList: List<Country>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +41,8 @@ class CountryListActivity : AppCompatActivity() {
         countryCall.enqueue(object : Callback<List<Country>> {
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
                 countryList = response.body() ?: listOf<Country>()
-                Log.d(TAG, "onResponse: ${response.body()}")
+                countries.addAll(countryList)
+                Log.d(TAG, "On response:"+countries.size)
                 adapter = CountryAdapter(countryList)
                 binding.recyclerViewCountryList.adapter = adapter
                 binding.recyclerViewCountryList.layoutManager = LinearLayoutManager(this@CountryListActivity)
@@ -46,6 +53,8 @@ class CountryListActivity : AppCompatActivity() {
             }
 
         })
+
+
 
         binding.switchToggleFavorite.setOnCheckedChangeListener { buttonView, isChecked ->
                 //toast for when checked
@@ -76,6 +85,11 @@ class CountryListActivity : AppCompatActivity() {
         inflater.inflate(R.menu.sorting_menu, menu)
         return true
     }
+
+    fun getList() : List<Country>{
+        return countryList
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean{
 

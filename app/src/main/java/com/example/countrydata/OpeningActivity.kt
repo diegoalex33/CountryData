@@ -3,11 +3,25 @@ package com.example.countrydata
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.countrydata.databinding.ActivityCountriesListBinding
 import com.example.countrydata.databinding.ActivityOpeningBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OpeningActivity : AppCompatActivity() {
 
+    val TAG = "OpeningActivity"
+
     private lateinit var binding: ActivityOpeningBinding
+
+    companion object{
+        var countries = arrayListOf<Country>()
+    }
+
+    lateinit var countryList: List<Country>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +32,24 @@ class OpeningActivity : AppCompatActivity() {
         val learnButton = binding.buttonOpeningLearn
         val learningActivityIntent = Intent(this, LearningActivity::class.java)
         val quizActivityIntent = Intent(this, QuizActivity::class.java)
+
+
+        val countryApi = RetrofitHelper.getInstance().create(CountryService::class.java)
+        val countryCall = countryApi.getCountryInfo("name,capital,area,population,alpha2Code")
+
+        countryCall.enqueue(object : Callback<List<Country>> {
+            override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
+                countryList = response.body() ?: listOf<Country>()
+                countries.addAll(countryList)
+                Log.d(TAG, "On response:"+ OpeningActivity.countries.size)
+            }
+
+            override fun onFailure(call: Call<List<Country>>, t: Throwable) {
+                Log.d(TAG, "onFailure: fail ${t.message}")
+            }
+
+        })
+
 
 
         learnButton.setOnClickListener {
