@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.countrydata.databinding.ActivityCountriesListBinding
 import com.example.countrydata.databinding.ActivityOpeningBinding
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +33,8 @@ class OpeningActivity : AppCompatActivity() {
         val learnButton = binding.buttonOpeningLearn
         val countryListActivityIntent = Intent(this, CountryListActivity::class.java)
         val quizActivityIntent = Intent(this, QuizActivity::class.java)
+
+        Picasso.get().load("https://pbs.twimg.com/media/CCNxWJdUAAEo7Pq?format=png&name=4096x4096").into(binding.imageView)
 
 
         val countryApi = RetrofitHelper.getInstance().create(CountryService::class.java)

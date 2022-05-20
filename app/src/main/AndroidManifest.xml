@@ -15,11 +15,6 @@
             android:name=".QuizActivity"
             android:exported="true" />
         <activity
-            android:name=".LearningActivity"
-            android:exported="true"
-            android:label="@string/title_activity_learning"
-            android:theme="@style/Theme.CountryData.NoActionBar" />
-        <activity
             android:name=".OpeningActivity"
             android:exported="true" >
             <intent-filter>
