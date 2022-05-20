@@ -30,7 +30,7 @@ class OpeningActivity : AppCompatActivity() {
 
         val quizButton = binding.buttonOpeningQuiz
         val learnButton = binding.buttonOpeningLearn
-        val learningActivityIntent = Intent(this, LearningActivity::class.java)
+        val countryListActivityIntent = Intent(this, CountryListActivity::class.java)
         val quizActivityIntent = Intent(this, QuizActivity::class.java)
 
 
@@ -53,7 +53,7 @@ class OpeningActivity : AppCompatActivity() {
 
 
         learnButton.setOnClickListener {
-            startActivity(learningActivityIntent)
+            startActivity(countryListActivityIntent)
         }
         quizButton.setOnClickListener {
             startActivity(quizActivityIntent)

@@ -47,10 +47,10 @@ class CountryAdapter(var countryList: List<Country>) :
         viewHolder.textViewCountry.text = country.name
         viewHolder.layout.setOnClickListener{
             val context = viewHolder.layout.context
-            val countryDetailIntent = Intent(context, CountryDetailActivity::class.java).apply {
+            val vaccinationDetailIntent = Intent(context, CountryDetailActivity::class.java).apply {
                 putExtra(CountryDetailActivity.EXTRA_COUNTRY, country)
             }
-            context.startActivity(countryDetailIntent)
+            context.startActivity(vaccinationDetailIntent)
         }
     }
 

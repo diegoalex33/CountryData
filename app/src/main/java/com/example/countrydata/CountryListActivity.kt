@@ -21,9 +21,6 @@ class CountryListActivity : AppCompatActivity() {
 
     var curList = 1
 
-    companion object{
-        var countries = arrayListOf<Country>()
-    }
 
     lateinit var countryList: List<Country>
     private lateinit var binding: ActivityCountriesListBinding
@@ -41,8 +38,7 @@ class CountryListActivity : AppCompatActivity() {
         countryCall.enqueue(object : Callback<List<Country>> {
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
                 countryList = response.body() ?: listOf<Country>()
-                countries.addAll(countryList)
-                Log.d(TAG, "On response:"+countries.size)
+                Log.d(TAG, "On response:")
                 adapter = CountryAdapter(countryList)
                 binding.recyclerViewCountryList.adapter = adapter
                 binding.recyclerViewCountryList.layoutManager = LinearLayoutManager(this@CountryListActivity)
