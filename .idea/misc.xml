@@ -4,17 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.40989583333333335" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24dp.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.40989583333333335" />
         <entry key="app/src/main/res/layout/activity_countries_list.xml" value="0.39375" />
         <entry key="app/src/main/res/layout/activity_country_detail.xml" value="0.38769230769230767" />
         <entry key="app/src/main/res/layout/activity_item_countries.xml" value="0.38769230769230767" />
-        <entry key="app/src/main/res/layout/activity_learning.xml" value="0.2984375" />
+        <entry key="app/src/main/res/layout/activity_learning.xml" value="0.1691995947315096" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39375" />
-        <entry key="app/src/main/res/layout/activity_opening.xml" value="0.284375" />
-        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2984375" />
+        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_country.xml" value="0.2234375" />
-        <entry key="app/src/main/res/menu/learning_menu.xml" value="0.2984375" />
-        <entry key="app/src/main/res/menu/sorting_menu.xml" value="0.39375" />
+        <entry key="app/src/main/res/menu/sorting_menu.xml" value="0.1477832512315271" />
       </map>
     </option>
   </component>

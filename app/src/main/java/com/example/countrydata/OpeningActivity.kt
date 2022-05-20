@@ -18,6 +18,7 @@ class OpeningActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOpeningBinding
 
+
     companion object{
         var countries = arrayListOf<Country>()
     }

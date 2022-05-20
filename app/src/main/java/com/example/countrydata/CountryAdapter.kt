@@ -17,7 +17,7 @@ class CountryAdapter(var countryList: List<Country>) :
      * (custom ViewHolder)
      */
 
-
+    var fullDataSet = countryList.map { it }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewCountry: TextView
