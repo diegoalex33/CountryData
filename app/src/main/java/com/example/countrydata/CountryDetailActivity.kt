@@ -4,6 +4,7 @@ package com.example.countrydata
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils.formatNumber
 import android.widget.Toast
 import com.example.countrydata.databinding.ActivityCountryDetailBinding
 import com.squareup.picasso.Picasso
@@ -34,11 +35,11 @@ class CountryDetailActivity : AppCompatActivity() {
         }
         binding.textViewCountryDetailCapital.text = countryInfo?.capital
         binding.textViewCountryDetailRegion.text = countryInfo?.subregion
-        binding.textViewCountryDetailArea.text = countryInfo?.area.toString()
         if(countryId!=null){
             Picasso.get().load(countryFlagUrl).into(binding.imageViewCountryDetailFlag)
         }
-        binding.textViewCountryDetailPopulation.text = countryInfo?.population.toString()
+        binding.textViewCountryDetailArea.text = countryInfo?.area?.let { formatArea(it.toInt()) }
+        binding.textViewCountryDetailPopulation.text = countryInfo?.population?.let { formatPopulation(it.toInt()) }
         binding.buttonCountryDetailFavorite.setOnClickListener {
             countryInfo?.isFavorite = true
             Toast.makeText(this,countryInfo?.name +" has been added to favorites", Toast.LENGTH_SHORT).show()
@@ -48,7 +49,10 @@ class CountryDetailActivity : AppCompatActivity() {
         }
 
         binding.buttonCountryDetailRandom.setOnClickListener {
-            val countryInfo = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()]
+            var countryInfo = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()]
+            if(CountryListActivity.favChecked == true){
+                countryInfo = favoriteList[(Math.random()*favoriteList.size).toInt()]
+            }
             val countryId = countryInfo?.alpha2Code?.toLowerCase()
             val countryFlagUrl = "https://flagcdn.com/w320/" +countryId+ ".png"
 
@@ -59,11 +63,11 @@ class CountryDetailActivity : AppCompatActivity() {
             }
             binding.textViewCountryDetailCapital.text = countryInfo?.capital
             binding.textViewCountryDetailRegion.text = countryInfo?.subregion
-            binding.textViewCountryDetailArea.text = countryInfo?.area.toString()
+            binding.textViewCountryDetailArea.text = countryInfo?.area?.let { formatArea(it.toInt()) }
+            binding.textViewCountryDetailPopulation.text = countryInfo?.population?.let { formatPopulation(it.toInt()) }
             if(countryId!=null){
                 Picasso.get().load(countryFlagUrl).into(binding.imageViewCountryDetailFlag)
             }
-            binding.textViewCountryDetailPopulation.text = countryInfo?.population.toString()
             binding.buttonCountryDetailFavorite.setOnClickListener {
                 countryInfo?.isFavorite = true
                 Toast.makeText(this,countryInfo?.name +" has been added to favorites", Toast.LENGTH_SHORT).show()
@@ -73,5 +77,13 @@ class CountryDetailActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun formatPopulation(input: Int): String {
+        return "" + java.text.NumberFormat.getIntegerInstance().format(input) + " people"
+    }
+
+    fun formatArea(input: Int): String{
+        return "" + java.text.NumberFormat.getIntegerInstance().format(input) + " square km"
     }
 }

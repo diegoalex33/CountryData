@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,10 +25,13 @@ class CountryListActivity : AppCompatActivity() {
 
     var curList = 1
 
-
+    companion object{
+        var favChecked = false
+    }
     lateinit var countryList: List<Country>
     private lateinit var binding: ActivityCountriesListBinding
     private lateinit var adapter: CountryAdapter
+    lateinit var favSwitch: Switch
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,17 +58,13 @@ class CountryListActivity : AppCompatActivity() {
 
         })
 
-        binding.buttonListRandom.setOnClickListener {
-            val country = countryList[((Math.random())*countryList.size).toInt()]
-            val countryDetailIntent = Intent(this, CountryDetailActivity::class.java).apply {
-                putExtra(CountryDetailActivity.EXTRA_COUNTRY, country)
-            }
-            startActivity(countryDetailIntent)
-        }
+        favSwitch = binding.switchToggleFavorite
 
 
 
-        binding.switchToggleFavorite.setOnCheckedChangeListener { buttonView, isChecked ->
+
+
+        favSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             //toast for when checked
             if (isChecked) {
                 Toast.makeText(this, "Showing favorites", Toast.LENGTH_SHORT).show()
@@ -74,6 +74,7 @@ class CountryListActivity : AppCompatActivity() {
                     LinearLayoutManager(this@CountryListActivity)
                 binding.switchToggleFavorite.text = "Show all"
                 curList *= -1
+                favChecked = true
             }
             //toast for when unchecked
             if (!isChecked) {
@@ -84,6 +85,24 @@ class CountryListActivity : AppCompatActivity() {
                     LinearLayoutManager(this@CountryListActivity)
                 binding.switchToggleFavorite.text = "Show favorites"
                 curList *= -1
+                favChecked = false
+            }
+        }
+
+        binding.buttonListRandom.setOnClickListener {
+            if(favSwitch.isChecked){
+                val country = CountryDetailActivity.favoriteList[((Math.random())*CountryDetailActivity.favoriteList.size).toInt()]
+                val countryDetailIntent = Intent(this, CountryDetailActivity::class.java).apply {
+                    putExtra(CountryDetailActivity.EXTRA_COUNTRY, country)
+                }
+                startActivity(countryDetailIntent)
+            }
+            else{
+                val country = countryList[((Math.random())*countryList.size).toInt()]
+                val countryDetailIntent = Intent(this, CountryDetailActivity::class.java).apply {
+                    putExtra(CountryDetailActivity.EXTRA_COUNTRY, country)
+                }
+                startActivity(countryDetailIntent)
             }
         }
     }

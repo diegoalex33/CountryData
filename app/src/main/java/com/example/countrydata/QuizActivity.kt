@@ -65,6 +65,10 @@ class QuizActivity : AppCompatActivity() {
         abutton1.setOnClickListener {
             if(abutton1.text == curQuestion.country.name){
                 score++
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
             }
             scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
             nextQuestion()
@@ -73,7 +77,10 @@ class QuizActivity : AppCompatActivity() {
         abutton2.setOnClickListener {
             if(abutton2.text == curQuestion.country.name){
                 score++
-
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
             }
             scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
             nextQuestion()
@@ -82,7 +89,10 @@ class QuizActivity : AppCompatActivity() {
         abutton3.setOnClickListener {
             if(abutton3.text == curQuestion.country.name){
                 score++
-
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
             }
             scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
             nextQuestion()
@@ -91,7 +101,10 @@ class QuizActivity : AppCompatActivity() {
         abutton4.setOnClickListener {
             if(abutton4.text == curQuestion.country.name){
                 score++
-
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
             }
             scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
             nextQuestion()
@@ -142,34 +155,52 @@ class QuizActivity : AppCompatActivity() {
     }
 
     fun determineQuestion(): Boolean {
-        if(curQuestion.questionType.equals("capital")){
+        if (curQuestion.questionType.equals("capital")) {
             question.text = curQuestion.country.capital + " is the capital of what country?"
+        } else if (curQuestion.questionType.equals("population")) {
+            question.text = curQuestion.country.population?.let { formatPopulation(it.toInt()) } + " is the population of what country?"
         }
-        else if(curQuestion.questionType.equals("population")){
-            question.text = curQuestion.country.population.toString() + " is the population of what country?"
+        else if (curQuestion.questionType.equals("area")) {
+            question.text = curQuestion.country.area?.let { formatArea(it.toInt()) } + " is the area of what country?"
         }
-        else if(curQuestion.questionType.equals("area")){
-            question.text = curQuestion.country.area.toString() + " is the area of what country?"
-        }
-        else if(curQuestion.questionType.equals("region")){
+        else if (curQuestion.questionType.equals("region")) {
             question.text = curQuestion.country.name + " is in what region?"
             return true
-        }
-        else{
+        } else {
             val countryId = curQuestion.country.alpha2Code.toLowerCase()
-            val countryFlagUrl = "https://flagcdn.com/w320/" +countryId+ ".png"
+            val countryFlagUrl = "https://flagcdn.com/w320/" + countryId + ".png"
             question.text = "To which country does this flag belong"
             Picasso.get().load(countryFlagUrl).into(binding.flag)
         }
-        return false
-    }
+            return false
+        }
+
 
     fun checkAnswer() {
-        if (answer.toLowerCase().equals(curQuestion.country.name.toLowerCase())) {
+        if(curQuestion.questionType.equals("region") && answer.toLowerCase().equals((curQuestion.country.subregion.toLowerCase()))){
             score++
+            Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+        }
+        else if (answer.toLowerCase().equals(curQuestion.country.name.toLowerCase())) {
+            score++
+            Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            if(curQuestion.questionType.equals("region")){
+                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.subregion, Toast.LENGTH_SHORT).show()
+            }
+            else{
+            Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
+            }
         }
         scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
     }
 
+    fun formatPopulation(input: Int): String {
+        return "" + java.text.NumberFormat.getIntegerInstance().format(input) + " people"
+    }
 
+    fun formatArea(input: Int): String{
+        return "" + java.text.NumberFormat.getIntegerInstance().format(input) + " square km"
+    }
 }
