@@ -36,7 +36,7 @@ class CountryListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val countryApi = RetrofitHelper.getInstance().create(CountryService::class.java)
-        val countryCall = countryApi.getCountryInfo("name,capital,area,population,alpha2Code")
+        val countryCall = countryApi.getCountryInfo("name,capital,area,population,subregion,alpha2Code")
 
         countryCall.enqueue(object : Callback<List<Country>> {
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
@@ -53,6 +53,14 @@ class CountryListActivity : AppCompatActivity() {
             }
 
         })
+
+        binding.buttonListRandom.setOnClickListener {
+            val country = countryList[((Math.random())*countryList.size).toInt()]
+            val countryDetailIntent = Intent(this, CountryDetailActivity::class.java).apply {
+                putExtra(CountryDetailActivity.EXTRA_COUNTRY, country)
+            }
+            startActivity(countryDetailIntent)
+        }
 
 
 

@@ -39,7 +39,7 @@ class OpeningActivity : AppCompatActivity() {
 
 
         val countryApi = RetrofitHelper.getInstance().create(CountryService::class.java)
-        val countryCall = countryApi.getCountryInfo("name,capital,area,population,alpha2Code")
+        val countryCall = countryApi.getCountryInfo("name,capital,area,population,subregion,alpha2Code")
 
         countryCall.enqueue(object : Callback<List<Country>> {
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {

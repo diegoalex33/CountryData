@@ -106,13 +106,15 @@ class QuizActivity : AppCompatActivity() {
         response.setText("")
         // setting the text in an edittext you have to use the function .setText()
         var countryNumber = ((Math.random())*OpeningActivity.countries.size).toInt()
-        var questionNumber = ((Math.random())*4).toInt()
+        var questionNumber = ((Math.random())*5).toInt()
         curQuestion = Question(countryNumber, questionNumber)
         numberOfQuestion++
         Picasso.get().load(stockImage).into(binding.flag)
         number.text = "Question " + numberOfQuestion
         determineQuestion()
-        makeMc(questionNumber)
+        if(determineQuestion()==false){
+            makeMc((questionNumber))
+        }
     }
 
     private fun makeMc(isMc : Int) {
@@ -139,7 +141,7 @@ class QuizActivity : AppCompatActivity() {
        }
     }
 
-    fun determineQuestion(){
+    fun determineQuestion(): Boolean {
         if(curQuestion.questionType.equals("capital")){
             question.text = curQuestion.country.capital + " is the capital of what country?"
         }
@@ -149,12 +151,17 @@ class QuizActivity : AppCompatActivity() {
         else if(curQuestion.questionType.equals("area")){
             question.text = curQuestion.country.area.toString() + " is the area of what country?"
         }
+        else if(curQuestion.questionType.equals("region")){
+            question.text = curQuestion.country.name + " is in what region?"
+            return true
+        }
         else{
             val countryId = curQuestion.country.alpha2Code.toLowerCase()
             val countryFlagUrl = "https://flagcdn.com/w320/" +countryId+ ".png"
             question.text = "To which country does this flag belong"
             Picasso.get().load(countryFlagUrl).into(binding.flag)
         }
+        return false
     }
 
     fun checkAnswer() {

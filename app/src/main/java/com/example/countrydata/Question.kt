@@ -10,7 +10,7 @@ import retrofit2.Response
 class Question(countryNumber: Int, questionNumber: Int) {
 
     var countryList = OpeningActivity.countries
-    var questionTypes = listOf("capital", "population", "area", "flag")
+    var questionTypes = listOf("capital", "population", "area", "flag", "region")
     var questionType = questionTypes[questionNumber]
     var country = countryList[countryNumber]
 }

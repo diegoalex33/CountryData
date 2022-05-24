@@ -11,6 +11,7 @@ data class Country(var name: String,
                    var capital: String?,
                    var population: Long,
                    var area: Double,
+                   var subregion: String,
                    var alpha2Code: String,
                    var isFavorite : Boolean
 ): Parcelable, Comparable<Country> {
