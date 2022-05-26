@@ -150,12 +150,6 @@ class CountryListActivity : AppCompatActivity() {
             return true
         }
 
-
-        fun getList(): List<Country> {
-            return countryList
-        }
-
-
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
             return when (item.itemId) {
