@@ -102,6 +102,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun makeMc(isMc : Int) {
        if(isMc%2==0){
+           var correctAnswer = ((Math.random())*4).toInt()
            response.visibility = View.GONE
            submit.visibility = View.GONE
            mcButtons.visibility = View.VISIBLE
@@ -109,13 +110,13 @@ class QuizActivity : AppCompatActivity() {
            abutton2.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
            abutton3.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
            abutton4.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
-           if (isMc==0){
+           if (correctAnswer==0){
                abutton1.text = curQuestion.country.name
            }
-           else if (isMc==1){
+           else if (correctAnswer==1){
                abutton2.text = curQuestion.country.name
            }
-           else if (isMc==2){
+           else if (correctAnswer==2){
                abutton3.text = curQuestion.country.name
            }
            else{
