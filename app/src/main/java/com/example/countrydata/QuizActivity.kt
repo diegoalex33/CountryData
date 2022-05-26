@@ -95,33 +95,32 @@ class QuizActivity : AppCompatActivity() {
         Picasso.get().load(stockImage).into(binding.flag)
         number.text = "Question " + numberOfQuestion
         determineQuestion()
-        if(determineQuestion()==false){
-            makeMc((questionNumber))
+        if(determineQuestion()==false && Math.random()<0.5 ){
+            makeMc()
         }
     }
 
-    private fun makeMc(isMc : Int) {
-       if(isMc%2==0){
-           response.visibility = View.GONE
-           submit.visibility = View.GONE
-           mcButtons.visibility = View.VISIBLE
-           abutton1.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
-           abutton2.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
-           abutton3.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
-           abutton4.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
-           if (isMc==0){
-               abutton1.text = curQuestion.country.name
+    private fun makeMc() {
+        var correctAnswer = ((Math.random())*4).toInt()
+        response.visibility = View.GONE
+        submit.visibility = View.GONE
+        mcButtons.visibility = View.VISIBLE
+        abutton1.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
+        abutton2.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
+        abutton3.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
+        abutton4.text = OpeningActivity.countries[((Math.random())*OpeningActivity.countries.size).toInt()].name
+        if (correctAnswer==0){
+            abutton1.text = curQuestion.country.name
+        }
+        else if (correctAnswer==1){
+            abutton2.text = curQuestion.country.name
            }
-           else if (isMc==1){
-               abutton2.text = curQuestion.country.name
-           }
-           else if (isMc==2){
-               abutton3.text = curQuestion.country.name
-           }
-           else{
-               abutton4.text = curQuestion.country.name
-           }
-       }
+        else if (correctAnswer==2){
+            abutton3.text = curQuestion.country.name
+        }
+        else{
+            abutton4.text = curQuestion.country.name
+        }
     }
 
     fun determineQuestion(): Boolean {
