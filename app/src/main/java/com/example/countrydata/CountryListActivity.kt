@@ -124,7 +124,7 @@ class CountryListActivity : AppCompatActivity() {
 
 
             val searchView = searchItem.actionView as SearchView
-            searchView.queryHint = "Search Fruit"
+            searchView.queryHint = "Search Country"
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     Log.d(TAG, "onQueryTextSubmit: submitted")
@@ -149,12 +149,6 @@ class CountryListActivity : AppCompatActivity() {
 
             return true
         }
-
-
-        fun getList(): List<Country> {
-            return countryList
-        }
-
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
