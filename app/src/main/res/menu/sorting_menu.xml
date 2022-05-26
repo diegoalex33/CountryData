@@ -12,4 +12,6 @@
         android:title="Sort by population"/>
     <item android:id="@+id/size"
         android:title="Sort by size"/>
+    <item android:id="@+id/Capital"
+        android:title="Sort by Capital"/>
 </menu>

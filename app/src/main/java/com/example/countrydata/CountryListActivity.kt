@@ -168,6 +168,21 @@ class CountryListActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                     return true
                 }
+                R.id.Capital -> {
+                    Toast.makeText(this, "Sorting by capital", Toast.LENGTH_SHORT).show()
+                    if (curList > 0) {
+                        adapter.countryList = adapter.countryList.sortedBy {
+                            it.capital
+                        }
+                    }
+                    if (curList < 0) {
+                        adapter.countryList = CountryDetailActivity.favoriteList.sortedBy {
+                            it.capital
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                    return true
+                }
                 R.id.population -> {
                     Toast.makeText(this, "Sorting by population", Toast.LENGTH_SHORT).show()
                     if (curList > 0) {
