@@ -64,7 +64,6 @@ class QuizActivity : AppCompatActivity() {
 
         abutton1.setOnClickListener {
             checkMc(abutton1)
-            var dog = 0
         }
 
         abutton2.setOnClickListener {
