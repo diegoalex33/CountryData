@@ -63,54 +63,24 @@ class QuizActivity : AppCompatActivity() {
         }
 
         abutton1.setOnClickListener {
-            if(abutton1.text == curQuestion.country.name){
-                score++
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
-            }
-            scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
-            nextQuestion()
+            checkMc(abutton1)
         }
 
         abutton2.setOnClickListener {
-            if(abutton2.text == curQuestion.country.name){
-                score++
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
-            }
-            scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
-            nextQuestion()
+            checkMc(abutton2)
         }
 
         abutton3.setOnClickListener {
-            if(abutton3.text == curQuestion.country.name){
-                score++
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
-            }
-            scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
-            nextQuestion()
+            checkMc(abutton3)
         }
 
         abutton4.setOnClickListener {
-            if(abutton4.text == curQuestion.country.name){
-                score++
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
-            }
-            scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
-            nextQuestion()
+            checkMc(abutton4)
         }
 
     }
+
+
 
     fun nextQuestion(){
         response.visibility = View.VISIBLE
@@ -175,6 +145,17 @@ class QuizActivity : AppCompatActivity() {
             return false
         }
 
+    private fun checkMc(button: Button) {
+        if(button.text == curQuestion.country.name){
+            score++
+            Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(this, "Incorrect, the correct answer is " + curQuestion.country.name, Toast.LENGTH_SHORT).show()
+        }
+        scoreDisplay.text = "Score: " + score + "/" + (numberOfQuestion)
+        nextQuestion()
+    }
 
     fun checkAnswer() {
         if(curQuestion.questionType.equals("region") && answer.toLowerCase().equals((curQuestion.country.subregion.toLowerCase()))){
