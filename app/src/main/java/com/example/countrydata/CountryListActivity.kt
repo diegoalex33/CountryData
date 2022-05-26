@@ -183,6 +183,21 @@ class CountryListActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                     return true
                 }
+                R.id.subregion -> {
+                    Toast.makeText(this, "Sorting by subregion", Toast.LENGTH_SHORT).show()
+                    if (curList > 0) {
+                        adapter.countryList = adapter.countryList.sortedBy {
+                            it.subregion
+                        }
+                    }
+                    if (curList < 0) {
+                        adapter.countryList = CountryDetailActivity.favoriteList.sortedBy {
+                            it.subregion
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                    return true
+                }
                 R.id.population -> {
                     Toast.makeText(this, "Sorting by population", Toast.LENGTH_SHORT).show()
                     if (curList > 0) {

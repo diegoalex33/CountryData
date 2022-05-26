@@ -14,4 +14,6 @@
         android:title="Sort by size"/>
     <item android:id="@+id/Capital"
         android:title="Sort by Capital"/>
+    <item android:id = "@+id/subregion"
+        android:title="Sort by subregion"/>
 </menu>
