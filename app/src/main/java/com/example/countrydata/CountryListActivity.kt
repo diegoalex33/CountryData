@@ -5,10 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Switch
 import android.widget.Toast
@@ -23,7 +21,7 @@ class CountryListActivity : AppCompatActivity() {
 
     val TAG = "CountryListActivity"
 
-    var curList = 1
+    private var curList = 1
 
     companion object{
         var favChecked = false
@@ -44,7 +42,7 @@ class CountryListActivity : AppCompatActivity() {
 
         countryCall.enqueue(object : Callback<List<Country>> {
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
-                countryList = response.body() ?: listOf<Country>()
+                countryList = response.body() ?: listOf()
                 Log.d(TAG, "On response:")
                 adapter = CountryAdapter(countryList)
                 binding.recyclerViewCountryList.adapter = adapter
@@ -64,7 +62,7 @@ class CountryListActivity : AppCompatActivity() {
 
 
 
-        favSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+        favSwitch.setOnCheckedChangeListener { _, isChecked ->
             //toast for when checked
             if (isChecked) {
                 Toast.makeText(this, "Showing favorites", Toast.LENGTH_SHORT).show()
